@@ -1,37 +1,69 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tflusecases/service.dart';
+import 'package:tflusecases/voide/services/speech_service.dart';
 
 class ModelScreen extends StatefulWidget {
-  const ModelScreen({required this.tfService, super.key});
+  const ModelScreen(
+      {required this.tfService, required this.speechService, super.key});
   final TFService tfService;
+  final SpeechService speechService;
 
   @override
   State<ModelScreen> createState() => _ModelScreenState();
 }
 
 class _ModelScreenState extends State<ModelScreen> {
-  String output = 'Press to excecute model';
+  String _output = 'Press to excecute model';
 
-  void runModel() async {
-    try {
-      final input = List.generate(
-        1,
-        (i) => List.generate(
-          224,
-          (j) => List.generate(224, (k) => List.generate(3, (l) => 0.5)),
-        ),
-      );
-      debugPrint('Input of type ${input.runtimeType}');
-      final results = await widget.tfService.runModel(input);
+  File? _image;
+
+  Future<void> _pickImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
       setState(() {
-        output = 'The result is $results';
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<void> _runModel() async {
+    if (_image == null) {
+      setState(() {
+        _output = 'Please select an image';
+      });
+    }
+
+    try {
+      // final input = List.generate(
+      //   1,
+      //   (i) => List.generate(
+      //     224,
+      //     (j) => List.generate(224, (k) => List.generate(3, (l) => 0.5)),
+      //   ),
+      // );
+      // debugPrint('Input of type ${input.runtimeType}');
+      final results = await widget.tfService.runModel(_image!);
+      setState(() {
+        _output = 'The result is $results';
       });
     } catch (e) {
       debugPrint('Catch error is: $e');
       setState(() {
-        output = 'Error is: $e';
+        _output = 'Error is: $e';
       });
     }
+  }
+
+  void _toogleListening() {
+    if (widget.speechService.isListening) {
+      widget.speechService.stopListening();
+    } else {
+      widget.speechService.startListening();
+    }
+    setState(() {});
   }
 
   @override
@@ -44,11 +76,41 @@ class _ModelScreenState extends State<ModelScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(output),
+            if (_image == null)
+              const Text('No image chosen')
+            else
+              Image.file(
+                _image!,
+                height: 200,
+              ),
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(onPressed: runModel, child: const Text('Run Model'))
+            ElevatedButton(
+              onPressed: _pickImage,
+              child: const Text('Upload image'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(_output),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: _runModel,
+              child: const Text('Run Model'),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text('Recognized text: ${widget.speechService.recognizedText}'),
+            ElevatedButton(
+              onPressed: _toogleListening,
+              child: widget.speechService.isListening
+                  ? const Text('Stop listening')
+                  : const Text('Start listening'),
+            ),
           ],
         ),
       ),

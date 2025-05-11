@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tflusecases/l10n/l10n.dart';
 import 'package:tflusecases/product/views/modelScreen.dart';
 import 'package:tflusecases/service.dart';
+import 'package:tflusecases/voide/services/speech_service.dart';
 
 class App extends StatelessWidget {
-  const App({required this.service, super.key});
+  const App({required this.service, required this.speechService, super.key});
 
   final TFService service;
+  final SpeechService speechService;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       home: ModelScreen(
         tfService: service,
+        speechService: speechService,
       ),
     );
   }

@@ -120,7 +120,7 @@ class _ModelScreenState extends State<ModelScreen> {
                 debugPrint('Battery level is $result');
               },
               child: const Text('Get battery level'),
-            )
+            ),
           ],
         ),
       ),

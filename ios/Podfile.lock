@@ -2,6 +2,10 @@ PODS:
   - Flutter (1.0.0)
   - image_picker_ios (0.0.1):
     - Flutter
+  - speech_to_text (0.0.1):
+    - Flutter
+    - FlutterMacOS
+    - Try
   - TensorFlowLiteC (2.12.0):
     - TensorFlowLiteC/Core (= 2.12.0)
   - TensorFlowLiteC/Core (2.12.0)
@@ -24,31 +28,38 @@ PODS:
     - TensorFlowLiteSwift (= 2.12.0)
     - TensorFlowLiteSwift/CoreML (= 2.12.0)
     - TensorFlowLiteSwift/Metal (= 2.12.0)
+  - Try (2.1.1)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - speech_to_text (from `.symlinks/plugins/speech_to_text/darwin`)
   - tflite_flutter (from `.symlinks/plugins/tflite_flutter/ios`)
 
 SPEC REPOS:
   trunk:
     - TensorFlowLiteC
     - TensorFlowLiteSwift
+    - Try
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
+  speech_to_text:
+    :path: ".symlinks/plugins/speech_to_text/darwin"
   tflite_flutter:
     :path: ".symlinks/plugins/tflite_flutter/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
+  speech_to_text: 9dc43a5df3cbc2813f8c7cc9bd0fbf94268ed7ac
   TensorFlowLiteC: 20785a69299185a379ba9852b6625f00afd7984a
   TensorFlowLiteSwift: 3a4928286e9e35bdd3e17970f48e53c80d25e793
   tflite_flutter: 64b192e11352fe36943ab6656e1d49207f1a5595
+  Try: 5ef669ae832617b3cee58cb2c6f99fb767a4ff96
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

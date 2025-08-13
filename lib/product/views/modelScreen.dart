@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tflusecases/product/views/nativeComunicator.dart';
 import 'package:tflusecases/service.dart';
 import 'package:tflusecases/voide/services/speech_service.dart';
 
@@ -111,6 +112,14 @@ class _ModelScreenState extends State<ModelScreen> {
                   ? const Text('Stop listening')
                   : const Text('Start listening'),
             ),
+            ElevatedButton(
+              onPressed: () async {
+                String result = await NativeComunicator.invokeNativeMethod(
+                    'getBatteryLevel');
+                print("Battery level is $result");
+              },
+              child: const Text("Get battery level"),
+            )
           ],
         ),
       ),

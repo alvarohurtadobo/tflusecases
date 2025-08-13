@@ -115,10 +115,11 @@ class _ModelScreenState extends State<ModelScreen> {
             ElevatedButton(
               onPressed: () async {
                 String result = await NativeComunicator.invokeNativeMethod(
-                    'getBatteryLevel');
-                print("Battery level is $result");
+                  'getBatteryLevel',
+                );
+                debugPrint('Battery level is $result');
               },
-              child: const Text("Get battery level"),
+              child: const Text('Get battery level'),
             )
           ],
         ),

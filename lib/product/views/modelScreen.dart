@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflusecases/product/views/nativeComunicator.dart';
 import 'package:tflusecases/service.dart';
@@ -55,6 +56,20 @@ class _ModelScreenState extends State<ModelScreen> {
       setState(() {
         _output = 'Error is: $e';
       });
+    }
+  }
+
+  Future<void> _takePicture() async {
+    try {
+      final String? imagePath =
+          await NativeComunicator.invokeNativeMethod('takePicture');
+      if (imagePath != null) {
+        setState(() {
+          _image = File(imagePath);
+        });
+      }
+    } on PlatformException catch (e) {
+      _output = "Error taking picture: ${e.message}";
     }
   }
 
@@ -120,6 +135,10 @@ class _ModelScreenState extends State<ModelScreen> {
                 debugPrint('Battery level is $result');
               },
               child: const Text('Get battery level'),
+            ),
+            ElevatedButton(
+              onPressed: _takePicture,
+              child: const Text('Get Picture'),
             ),
           ],
         ),

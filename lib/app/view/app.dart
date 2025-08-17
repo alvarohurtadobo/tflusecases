@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tflusecases/l10n/arb/app_localizations.dart';
-import 'package:tflusecases/product/views/modelScreen.dart';
+import 'package:tflusecases/product/views/model_screen.dart';
 import 'package:tflusecases/service.dart';
 import 'package:tflusecases/voide/services/speech_service.dart';
 

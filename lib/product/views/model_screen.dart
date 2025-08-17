@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tflusecases/product/views/nativeComunicator.dart';
+import 'package:tflusecases/product/views/native_comunicator.dart';
 import 'package:tflusecases/service.dart';
 import 'package:tflusecases/voide/services/speech_service.dart';
 
@@ -69,7 +69,7 @@ class _ModelScreenState extends State<ModelScreen> {
         });
       }
     } on PlatformException catch (e) {
-      _output = "Error taking picture: ${e.message}";
+      _output = 'Error taking picture: ${e.message}';
     }
   }
 
@@ -129,7 +129,7 @@ class _ModelScreenState extends State<ModelScreen> {
             ),
             ElevatedButton(
               onPressed: () async {
-                String result = await NativeComunicator.invokeNativeMethod(
+                final result = await NativeComunicator.invokeNativeMethod(
                   'getBatteryLevel',
                 );
                 debugPrint('Battery level is $result');

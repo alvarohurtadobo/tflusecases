@@ -13,7 +13,7 @@ class SpeechService {
   }
 
   Future<void> startListening() async {
-    bool available = await _speechToText.initialize();
+    final available = await _speechToText.initialize();
     if (available) {
       _isListening = true;
       await _speechToText.listen(onResult: _onSpeechResult);

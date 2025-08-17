@@ -7,8 +7,11 @@ import 'package:tflusecases/service.dart';
 import 'package:tflusecases/voide/services/speech_service.dart';
 
 class ModelScreen extends StatefulWidget {
-  const ModelScreen(
-      {required this.tfService, required this.speechService, super.key});
+  const ModelScreen({
+    required this.tfService,
+    required this.speechService,
+    super.key,
+  });
   final TFService tfService;
   final SpeechService speechService;
 

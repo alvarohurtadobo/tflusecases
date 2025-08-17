@@ -65,7 +65,7 @@ class TFService {
 
     try {
       _interpreter!.run(input, formatedOutput);
-      // debugPrint('Result sample is ${formatedOutput[0].toStringAsFixed(10)}');
+      // debugPrint('Result sample is ${formatedOutput[0].toStringAsFixed(10)}')
       // debugPrint('Result is $formatedOutput');
       debugPrint('Result output is ${formatedOutput[0]}');
       return formatedOutput[0];

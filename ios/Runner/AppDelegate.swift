@@ -58,7 +58,7 @@ import UIKit
 
 extension AppDelegate: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info:[UIImagePickerController.InfoKey : Any]){
-    if let imageUrl = info[UIImagePickerController.InfoKey.imageUrl] as? URL {
+    if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
       let imagePath = imageUrl.path 
 
       if let controller = window?.rootViewController as? FlutterViewController {

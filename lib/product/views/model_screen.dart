@@ -107,7 +107,7 @@ class _ModelScreenState extends State<ModelScreen> {
             ),
             ElevatedButton(
               onPressed: _pickImage,
-              child: const Text('Upload image'),
+              child: const Text('Take picture'),
             ),
             const SizedBox(
               height: 20,

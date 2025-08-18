@@ -66,6 +66,7 @@ class _ModelScreenState extends State<ModelScreen> {
     try {
       final String? imagePath =
           await NativeComunicator.invokeNativeMethod('takePicture');
+      print("Image is $imagePath");
       if (imagePath != null) {
         setState(() {
           _image = File(imagePath);

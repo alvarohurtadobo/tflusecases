@@ -12,7 +12,6 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
 
-
 class MainActivity: FlutterActivity() {
     private val CHANNEL = "com.example.verygoodcore.tflusecases/native"
 
@@ -47,25 +46,41 @@ class MainActivity: FlutterActivity() {
     }
 
     private fun takePicture(result: MethodChannel.Result){ 
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        imageFile = File(cacheDir, "capture_image.jpg")
-        val uri: Uri = FileProvider.getUriForFile(this, "$packageName.provider", imageFile!!)
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-        // startActivityForResult(intent, 1001)
-        // result.success(imageFile.absolutePath)
+        println(">>> takePicture(): inicio")
+        try{
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            println(">>> Intent creado: $intent")
+            imageFile = File(cacheDir, "capture_image.jpg")
+            println(">>> File creado en cacheDir: ${imageFile}")
 
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivityForResult(intent, 1001);
-        } else {
-            result.error("UNAVAILABLE", "Unable to open camera", null);
+            val authority = applicationContext.packageName + ".provider"
+            println(">>> Authority generado: $authority")
+            val uri: Uri = FileProvider.getUriForFile(this, authority, imageFile!!)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+            // startActivityForResult(intent, 1001)
+            // result.success(imageFile.absolutePath)
+
+            if (intent.resolveActivity(packageManager) != null) {
+                println(">>> Cámara encontrada, lanzando intent…")
+                startActivityForResult(intent, 1001);
+            } else {
+                println(">>> No se encontró app de cámara")
+                result.error("UNAVAILABLE", "Unable to open camera", null);
+            }
+        } catch (e: Exception) {
+            println(">>> ERROR en takePicture(): ${e.message}")
+            e.printStackTrace()
+            result.error("ERROR", "Exception in takePicture: ${e.localizedMessage}", null)
         }
     }
 
     override fun onActivityResult(requestCode: Int,  resultCode: Int, data: Intent?){
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1001 && resultCode == Activity.RESULT_OK && data != null){
+        println(">>> onActivityResult")
+        if(requestCode == 1001 && resultCode == Activity.RESULT_OK){
             // String imagePath = data.getData().toString();
             imageFile?.let {
+                println(">>> Imagen guardada en: ${it.absolutePath}")
                 MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, CHANNEL)
                     .invokeMethod("takePicture", it.absolutePath)
             }

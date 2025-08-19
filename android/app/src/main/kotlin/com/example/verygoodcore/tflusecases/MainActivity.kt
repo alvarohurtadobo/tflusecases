@@ -85,7 +85,5 @@ class MainActivity: FlutterActivity() {
                     .invokeMethod("takePicture", it.absolutePath)
             }
         }
-
-        // new MethodChannel(getFlutterEngine(.getDartExecutor(), CHANNEL)).invoteMethod("takePicture", imagePath);
     }
 }

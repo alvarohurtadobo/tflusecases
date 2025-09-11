@@ -13,7 +13,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_localizations:
     sdk: flutter
-  # flutter_vision: ^2.0.0
+  flutter_vision: ^2.0.0
   image: ^4.5.4
   image_picker: ^1.1.2 
   intl: ^0.20.2
@@ -31,7 +31,7 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/models/mobilenet_v1_1.0_224.tflite
-    - assets/models/labels.txt
-    # - assets/labels.txt
-    # - assets/yolovx.tflite
+    # - assets/models/mobilenet_v1_1.0_224.tflite
+    # - assets/models/labels.txt
+    - assets/labels.txt
+    - assets/yolovx.tflite
